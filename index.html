@@ -8,10 +8,11 @@
   <title>Unibeat</title>
 </head>
   	<body>
-        <div id="container"></div>
-        <script src="https://www.clicktorelease.com/code/perlin/js/three.min.js"></script>
-        <script src="https://www.clicktorelease.com/code/perlin/js/OrbitControls.js"></script>
-        <script type="x-shader/x-vertex" id="vertexShader">
+      <div id="container"></div>
+      <script src="https://www.clicktorelease.com/code/perlin/js/three.min.js"></script>
+      <script src="https://www.clicktorelease.com/code/perlin/js/OrbitControls.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.16/addons/p5.sound.js"></script>
+      <script type="x-shader/x-vertex" id="vertexShader">
     //
     // GLSL textureless classic 3D noise "cnoise",
     // with an RSL-style periodic variant "pnoise".
@@ -292,7 +293,7 @@
       scene = new THREE.Scene();
     
       camera = new THREE.PerspectiveCamera( fov, window.innerWidth / window.innerHeight, 1, 10000 );
-      camera.position.z = 150;
+      camera.position.z = 300;
       camera.target = new THREE.Vector3( 0, 0, 0 );
     
       scene.add( camera );
@@ -333,18 +334,17 @@
       render();
     
     }
-    
     function onWindowResize() {
       renderer.setSize( window.innerWidth, window.innerHeight );
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
     }
-
     var start = Date.now();
     function render() {
       material.uniforms[ 'time' ].value = .00025 * ( Date.now() - start );
     //	material.uniforms[ 'weight' ].value = 10.0 * ( .5 + .5 * Math.sin( .00025 * ( Date.now() - start ) ) );
       material.uniforms[ 'weight' ].value = 5.0;
+      renderer.setClearColor(0xffffff, 1);
       renderer.render( scene, camera );
       requestAnimationFrame( render );
     }
